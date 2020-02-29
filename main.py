@@ -1,10 +1,10 @@
-print("start")
 import json
 import logging
 # import db_connect
 from user_class_bot import UserBot
 from config.aws_config import AWS_URL
 from config.bot_config import TOKEN
+import bot as messages_handler
 
 import telebot
 
@@ -28,7 +28,6 @@ http_error = {'statusCode': 403}
 updates_list = list()
 
 
-
 def lambda_handler(event, context):
     try:
         request = json.loads(event['body'])
@@ -45,7 +44,7 @@ def lambda_handler(event, context):
     if update.message:
         handle_message(update)
     elif update.callback_query:
-        # handle_query(update.callback_query)
+        messages_handler.query_handler(update.callback_query)
         pass
     else:
         bot.send_message(update.chat.id, messages.help)
@@ -57,15 +56,12 @@ def handle_message(update):
     user_bot = UserBot(bot, update, update.message.from_user)
     print(user_bot.user_id, user_bot.user_name)
     if message.content_type == 'text' and message.text[0] == '/':
-        print(message.text, update.message.chat.id)
         user_bot.handle_commands(message)
-        # bot.send_message(update.message.chat.id, text="Ololo")
     elif message.content_type == 'sticker':
         bot.reply_to(message, message.sticker.emoji)
     else:
         # user_bot.handle_message(message)
         pass
-    print("end of handling")
 
 
 # def handle_query(query):

@@ -1,5 +1,6 @@
 # import db_connect
 from send_message import *
+import bot as message_handlers
 
 # BD connect
 # conn = db_connect.conn_to_db()
@@ -52,8 +53,8 @@ class UserBot:
     def handle_commands(self, message):
         print("Message from class", message.text[1:])
         if message.text[1:] in ['start', 'reset']:
-            # self.telebot.send_message(message.chat.id, "Ololo")
-            send_start_message(self.telebot, message.chat.id)
+            message_handlers.start_message(message)
+            # send_start_message(self.telebot, message.chat.id)
         elif message.text[1:] == 'faq':
             send_faq_message(self.telebot, message.chat.id)
         else:
