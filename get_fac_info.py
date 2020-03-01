@@ -1,7 +1,7 @@
 import csv
 import re
 
-def get_info(fac, csv_path):
+def get_info(fac, csv_path='data/fac_info.csv'):
     response = {
             "name": [],
             "description": [],

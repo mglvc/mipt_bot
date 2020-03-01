@@ -14,6 +14,8 @@ from user_class_bot import UserBot
 # from handlers.keyboard_constructors import create_keyboard, add_back_button
 # from my_config import config
 
+# conn = db_connect.conn_to_db()
+
 # Initializing bot and logging
 telebot.logger.setLevel(logging.INFO)
 bot = telebot.TeleBot(TOKEN)
