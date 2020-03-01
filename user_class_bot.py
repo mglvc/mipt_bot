@@ -82,6 +82,7 @@ class UserBot:
             if len(result) < 6:
                 self.state = 0
                 self.update_data()
+                message.text = "Мало данных"
                 return bot.start_message(message, -1)
             self.init_subjects([int(sub) for sub in result])
             exams = {
@@ -93,6 +94,11 @@ class UserBot:
                 "chem": self.chemistry
             }
             opps = calc_ege(exams)
+            if not len(opps):
+                self.state = 0
+                self.update_data()
+                message.text = "Не нашлось факультета под ваши данные"
+                return bot.start_message(message, -1)
             out = '\n\n===========\n\n'.join([' '.join(row) for row in opps])
             self.telebot.send_message(message.chat.id, out)
             self.state = 0

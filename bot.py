@@ -191,7 +191,7 @@ bac, mag, phis, prmath, russ, inf = 0, 0, 0, 0, 0, 0
 @bot.message_handler(commands=['start'])
 def start_message(message, error=0):
     if error:
-        bot.send_message(message.chat.id, "Wrong data")
+        bot.send_message(message.chat.id, message.text)
     markup = telebot.types.InlineKeyboardMarkup()
     markup.add(
         telebot.types.InlineKeyboardButton(text='🎓 Бакалавриат или специалитет',
