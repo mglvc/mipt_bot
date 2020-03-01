@@ -4,7 +4,7 @@ import logging
 import telebot
 
 import bot as messages_handler
-import compare
+# import compare
 from config.aws_config import AWS_URL
 from config.bot_config import TOKEN
 from data import messages
@@ -27,7 +27,6 @@ bot.set_webhook(url=AWS_URL)
 # Const data
 http_success = {'statusCode': 200}
 http_error = {'statusCode': 403}
-delimiter = '\n' + '-' * 8 + '\n'
 
 # Setting up Bot info
 updates_list = list()
@@ -49,8 +48,8 @@ def lambda_handler(event, context):
     if update.message:
         handle_message(update)
     elif update.callback_query:
-        messages_handler.query_handler(update.callback_query)
-        pass
+        handle_query(update, update.callback_query)
+        # messages_handler.query_handler()
     else:
         bot.send_message(update.chat.id, messages.help)
     return http_success
@@ -65,19 +64,22 @@ def handle_message(update):
     elif message.content_type == 'sticker':
         bot.reply_to(message, message.sticker.emoji)
     else:
-        result = compare.compare(update.message.text)
-        if isinstance(result, str):
-            bot.send_message(update.message.chat.id, result)
-        else:
-            mes = ""
-            for i, ans in enumerate(result):
-                mes += ans[0] + '\n' + ans[1]
-                if i != len(result) - 1:
-                    mes += delimiter
-            bot.send_message(update.message.chat.id, mes)
+        user_bot.handle_message(message)
+        # result = compare.compare(update.message.text)
+        # if isinstance(result, str):
+        #     bot.send_message(update.message.chat.id, result)
+        # else:
+        #     mes = ""
+        #     for i, ans in enumerate(result):
+        #         mes += ans[0] + '\n' + ans[1]
+        #         if i != len(result) - 1:
+        #             mes += delimiter
+        #     bot.send_message(update.message.chat.id, mes)
         pass
 
-# def handle_query(query):
+def handle_query(update, call):
+    user_bot = UserBot(bot, update, update.callback_query.from_user)
+    user_bot.handle_query(call)
 #     data = query.data
 #     chat_id = query.message.chat.id
 #     keyboard = None

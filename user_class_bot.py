@@ -1,6 +1,10 @@
 import bot as message_handlers
+import compare_old as compare
 import db_connect
+from data.consts import delimiter
+from data.consts import subjects_in_db_start, subjects_in_db_end
 from send_message import *
+import bot
 
 # BD connect
 conn = db_connect.conn_to_db()
@@ -16,12 +20,21 @@ class UserBot:
         # Check user in db
         if self.find_user_db(user, update) == 0:
             # place for 1st question
-            pass
+
             # place for 2nd question
             pass
-        self.state = self.av_states[1]
+        # self.state = self.av_states[1]
+
+    def init_subjects(self, data):
+        self.math = data[0]
+        self.russian = data[1]
+        self.biology = data[2]
+        self.informatics = data[3]
+        self.physics = data[4]
+        self.chemistry = data[5]
 
     def find_user_db(self, user, update):
+        print("Data", user, update)
         with conn.cursor() as cur:
             cur.execute(f"SELECT * from users WHERE {user.id} = user_id")
             # print(user.id)
@@ -30,26 +43,42 @@ class UserBot:
                 print(f"User {user.id}, {user.first_name} already in DB")
                 self.degree_status = data[1]
                 self.gov_status = data[2]
+                self.state = data[5]
+                self.init_subjects(data[subjects_in_db_start:
+                                        subjects_in_db_end])
                 return 1
             else:
                 cur.execute(
                     f"INSERT into users (user_id, name, last_update_id) "
                     f"values ({user.id}, '{user.username}', {update.update_id})")
                 print(f"Added user {user.id}, {user.first_name} in DB")
+                self.init_subjects([0 for _ in range(6)])
+                conn.commit()
                 return 0
 
     def update_data(self):
         with conn.cursor() as cur:
-            cur.execute(f"UPDATE users"
-                        f"SET"
-                        f"degree_status = {self.degree_status}"
-                        f"gov_status = {self.gov_status}"
-                        f"WHERE user_id = {self.user_id}")
+            print(self.degree_status, self.gov_status, self.state, self.user_id)
+            cur.execute(f"UPDATE users "
+                        f"SET "
+                        f"degree_status = {self.degree_status}, "
+                        f"gov_status = {self.gov_status}, "
+                        f"state = {self.state} "
+                        f"WHERE user_id = {self.user_id} ")
+            conn.commit()
 
     def handle_message(self, message):
-        if self.state == 2:
-            # Place for searching question algo
-            pass
+        if self.state == bot.QUEST_STATE:
+            result = compare.compare(message.text)
+            if isinstance(result, str):
+                self.telebot.send_message(message.chat.id, result)
+            else:
+                mes = ""
+                for i, ans in enumerate(result):
+                    mes += ans[0] + '\n' + ans[1]
+                    if i != len(result) - 1:
+                        mes += delimiter
+                self.telebot.send_message(message.chat.id, mes)
         else:
             send_help_message(self.telebot, message.chat.id)
 
@@ -62,3 +91,12 @@ class UserBot:
             send_faq_message(self.telebot, message.chat.id)
         else:
             send_help_message(self.telebot, message.chat.id)
+
+    def handle_query(self, call):
+        t = bot.query_handler(call)
+        if t in [bot.BACH, bot.MAST]:
+            self.degree_status = t
+        elif t:
+            self.state = t
+        print(self.state, call.data)
+        self.update_data()
