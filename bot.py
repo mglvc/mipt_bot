@@ -17,10 +17,10 @@ bot = telebot.TeleBot(TOKEN)
 def cel(call):
     keyboardmain = types.InlineKeyboardMarkup(row_width=1)
     keyboardmain.add(
-        types.InlineKeyboardButton(text="back", callback_data="bacmenu"))
+        types.InlineKeyboardButton(text="Назад", callback_data="bacmenu"))
     bot.edit_message_text(chat_id=call.message.chat.id,
                           message_id=call.message.message_id,
-                          text="прием на целевое направление https://t.me/iv?url=https%3A%2F%2Fpk.mipt.ru%2Fbachelor%2Fcorp%2F&rhash=d8d1e26f87c4db",
+                          text="Прием на целевое направление https://t.me/iv?url=https%3A%2F%2Fpk.mipt.ru%2Fbachelor%2Fcorp%2F&rhash=d8d1e26f87c4db",
                           reply_markup=keyboardmain)
 
 
@@ -28,19 +28,19 @@ def bachelor(call):
     bac = 1
     keyboardmain = types.InlineKeyboardMarkup(row_width=6)
     keyboardmain.add(
-        types.InlineKeyboardButton(text="Куда вы можете поступить?",
+        types.InlineKeyboardButton(text="Куда можно поступить?",
                                    callback_data='exams'))
     keyboardmain.add(
-        types.InlineKeyboardButton(text="Oлимпиады", callback_data='olimp'))
+        types.InlineKeyboardButton(text="Олимпиады дающие льготы", callback_data='olimp'))
     keyboardmain.add(
-        types.InlineKeyboardButton(text="Целевое", callback_data="celevoe"))
-    keyboardmain.add(telebot.types.InlineKeyboardButton(text='Почитать FAQ',
+        types.InlineKeyboardButton(text="Целевое обучение за счет компаний", callback_data="celevoe"))
+    keyboardmain.add(telebot.types.InlineKeyboardButton(text='Часто задаваемые вопросы',
                                                         callback_data=5))
     keyboardmain.add(
         types.InlineKeyboardButton(text="back", callback_data="mainmenu"))
     bot.edit_message_text(chat_id=call.message.chat.id,
                           message_id=call.message.message_id,
-                          text="вы собираетесь в бакалавриат или специалитет",
+                          text="Вас интересует  бакалавриат или специалитет?",
                           reply_markup=keyboardmain)
 
 def facs_info(call):
@@ -63,16 +63,16 @@ def olymp(call):
                                              callback_data="bacmenu"))
     bot.edit_message_text(chat_id=call.message.chat.id,
                           message_id=call.message.message_id,
-                          text="Вы  можете поступить с помощью олимпиад из этого списка https://t.me/iv?url=https%3A%2F%2Fpk.mipt.ru%2Fbachelor%2F2020_olympiads%2F&rhash=d8d1e26f87c4db",
+                          text="Вы  можете поступить с учетом результатов олимпиад из этого списка https://t.me/iv?url=https%3A%2F%2Fpk.mipt.ru%2Fbachelor%2F2020_olympiads%2F&rhash=d8d1e26f87c4db",
                           reply_markup=k)
 
 
 def maga(call):
-    # answer = 'магистратуру'
+    # answer = 'Магистратуру'
     mag = 1
     key = types.InlineKeyboardMarkup(row_width=2)
-    key.add(types.InlineKeyboardButton(text="Почитать FAQ", callback_data="6"))
-    key.add(types.InlineKeyboardButton(text="back", callback_data="mainmenu"))
+    key.add(types.InlineKeyboardButton(text="Часто задаваемые вопросы", callback_data="6"))
+    key.add(types.InlineKeyboardButton(text="Назад", callback_data="mainmenu"))
     bot.edit_message_text(chat_id=call.message.chat.id,
                           message_id=call.message.message_id,
                           text="Вы собираетесь поступать в магистратуру",
@@ -83,8 +83,8 @@ def faqmag(call):
     answer = 'магистратуру'
     mag = 1
     key = types.InlineKeyboardMarkup(row_width=2)
-    key.add(types.InlineKeyboardButton(text="Почитать FAQ", callback_data="6"))
-    key.add(types.InlineKeyboardButton(text="back", callback_data="mainmenu"))
+    key.add(types.InlineKeyboardButton(text="Часто задаваемые вопросы", callback_data="6"))
+    key.add(types.InlineKeyboardButton(text="Назад", callback_data="mainmenu"))
     bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                           text="Для поступающих в магистратуру может быть полезна следующая информация",
                           reply_markup=key)
@@ -93,9 +93,9 @@ def faqmag(call):
 def faqbac(call):
     key = types.InlineKeyboardMarkup(row_width=2)
     key.add(types.InlineKeyboardButton(
-        text="Моего вопроса нет в FAQ, задать вопрос",
+        text="Не нашел ответа в FAQ, хочу задать задать свой вопрос",
         callback_data="quest_bac"))
-    key.add(types.InlineKeyboardButton(text="back", callback_data="bacmenu"))
+    key.add(types.InlineKeyboardButton(text="Назад", callback_data="bacmenu"))
     bot.edit_message_text(chat_id=call.message.chat.id,
                           message_id=call.message.message_id,
                           text="Вы можете прочитать FAQ перейдя по этой ссылке https://t.me/iv?url=https%3A%2F%2Fpk.mipt.ru%2Fbachelor%2Fquestion-answer%2F&rhash=a6c88d20ddb864",
@@ -109,7 +109,7 @@ def mainm(call):
     markup.add(
         telebot.types.InlineKeyboardButton(text='Бакалавриат или специалитет',
                                            callback_data=3))
-    markup.add(telebot.types.InlineKeyboardButton(text='Магистратуру',
+    markup.add(telebot.types.InlineKeyboardButton(text='Магистратура',
                                                   callback_data=4))
     # markup.add(telebot.types.InlineKeyboardButton(text='Почитать FAQ', callback_data=5))
     bot.send_message(chat_id=call.message.chat.id,
@@ -117,7 +117,7 @@ def mainm(call):
 
 def quest(call):
     k = types.InlineKeyboardMarkup(row_width=1)
-    k.add(types.InlineKeyboardButton(text='back', callback_data='4'))
+    k.add(types.InlineKeyboardButton(text='Назад', callback_data='4'))
     bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                           text="Напишите ваш вопрос", reply_markup=k)
 
@@ -160,10 +160,10 @@ def start_message(message):
     markup.add(
         telebot.types.InlineKeyboardButton(text='Бакалавриат или специалитет',
                                            callback_data=3))
-    markup.add(telebot.types.InlineKeyboardButton(text='Магистратуру',
+    markup.add(telebot.types.InlineKeyboardButton(text='Магистратура',
                                                   callback_data=4))
     # markup.add(telebot.types.InlineKeyboardButton(text='Почитать FAQ', callback_data=5))
-    bot.send_message(message.chat.id, text="Вы хотите поступить в...?",
+    bot.send_message(message.chat.id, text="Какие варианты поступления интересуют?",
                      reply_markup=markup)
 
 
