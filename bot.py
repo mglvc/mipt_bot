@@ -6,7 +6,7 @@ from telebot import types
 
 from config.bot_config import TOKEN
 from data.consts import BACH, MAST
-from data.consts import QUEST_STATE
+from data.consts import QUEST_STATE, EXAMS_STATE
 
 # TOKEN = '955620028:AAFuqC8MSVkQa-50OdCnCxNyI5BJXHCAf8c'
 
