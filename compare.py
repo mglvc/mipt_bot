@@ -3,26 +3,25 @@ import csv
 from difflib import SequenceMatcher
 #from nltk.corpus import stopwords
 
-from nltk.corpus import stopwords
+# from nltk.corpus import stopwords
 from pymystem3 import Mystem
 from string import punctuation
 
 #Create lemmatizer and stopwords list
-mystem = Mystem() 
-russian_stopwords = stopwords.words("russian")
+mystem = Mystem()
 
 #Preprocess function
 def preprocess_text(text):
     tokens = mystem.lemmatize(text.lower())
-    tokens = [token for token in tokens if token not in russian_stopwords\
-              and token != " " \
+    tokens = [token for token in tokens if #if token not in russian_stopwords\
+              token != " " \
               and token.strip() not in punctuation]
     
     text = " ".join(tokens)
     
     return text
 
-file_name = 'faq.csv'
+file_name = 'data/faq.csv'
 NO_RESULT = "Ничего не найдено по вашему вопросу, вы можете задать вопрос по " \
             "ссылке https://pk.mipt.ru/faq/"
 
@@ -45,7 +44,7 @@ def compare(question):
             for i in range (1,4):
                 #global Answer, Answer2, Answer3, Answer4, Answer5, Score, Score2, Score3, Score4, Score5, rawdata, maxim
                 #maxim = 0
-                s = SequenceMatcher(lambda x: x == " ", question, str(i))
+                s = SequenceMatcher(lambda x: x == " ", question, str(row[i]))
                 ratio = s.ratio()
                 if ratio > maxim:
                     Answer5, Score5 = Answer4, Score4
@@ -58,7 +57,6 @@ def compare(question):
                     rawdata = row
 
             x += 1
-            print(x)
     result = [Answer, Score, Answer2, Score2, Answer3, Score3, Answer4, Score4, Answer5, Score5, rawdata]
     #print(result)
     if Score >= 0.21:
