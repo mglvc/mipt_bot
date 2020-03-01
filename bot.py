@@ -154,7 +154,7 @@ def start_message(message, error=0):
         bot.send_message(message.chat.id, "Wrong data")
     markup = telebot.types.InlineKeyboardMarkup()
     markup.add(
-        telebot.types.InlineKeyboardButton(text='Бакалавриат или специалитет',
+        telebot.types.InlineKeyboardButton(text='Бакалавриат или магистратура',
                                            callback_data=3))
     markup.add(telebot.types.InlineKeyboardButton(text='Магистратура',
                                                   callback_data=4))

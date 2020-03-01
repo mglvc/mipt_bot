@@ -31,7 +31,7 @@ def calc_ege(subjects, csv_path='data/sc.csv', budget_flag=0):
                 passing = int(row[-2])
 
             if score_cur + 10 >= passing:
-                var_ret.append(row + [score_cur])
+                var_ret.append(row + [str(score_cur)])
 
     return var_ret
 
