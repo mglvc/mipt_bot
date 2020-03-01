@@ -17,10 +17,10 @@ bot = telebot.TeleBot(TOKEN)
 def cel(call):
     keyboardmain = types.InlineKeyboardMarkup(row_width=1)
     keyboardmain.add(
-        types.InlineKeyboardButton(text="back", callback_data="bacmenu"))
+        types.InlineKeyboardButton(text="Назад", callback_data="bacmenu"))
     bot.edit_message_text(chat_id=call.message.chat.id,
                           message_id=call.message.message_id,
-                          text="прием на целевое направление https://t.me/iv?url=https%3A%2F%2Fpk.mipt.ru%2Fbachelor%2Fcorp%2F&rhash=d8d1e26f87c4db",
+                          text="Прием на целевое направление https://t.me/iv?url=https%3A%2F%2Fpk.mipt.ru%2Fbachelor%2Fcorp%2F&rhash=d8d1e26f87c4db",
                           reply_markup=keyboardmain)
 
 
@@ -117,7 +117,7 @@ def mainm(call):
 
 def quest(call):
     k = types.InlineKeyboardMarkup(row_width=1)
-    k.add(types.InlineKeyboardButton(text='back', callback_data='4'))
+    k.add(types.InlineKeyboardButton(text='Назад', callback_data='4'))
     bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                           text="Напишите ваш вопрос", reply_markup=k)
 
