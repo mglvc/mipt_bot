@@ -59,7 +59,7 @@ def bachelor(call):
     keyboardmain.add(telebot.types.InlineKeyboardButton(text='❓ Часто задаваемые вопросы',
                                                         callback_data=5))
     keyboardmain.add(
-        types.InlineKeyboardButton(text="back", callback_data="mainmenu"))
+        types.InlineKeyboardButton(text="Назад", callback_data="mainmenu"))
     bot.edit_message_text(chat_id=call.message.chat.id,
                           message_id=call.message.message_id,
                           text="Вас интересует  бакалавриат или специалитет?",
@@ -261,31 +261,31 @@ def query_handler(call):
 
     elif call.data == 'FPMI':
         data = gfi.get_info('ФПМИ')
-        send_descr(call, data)
+        return send_descr(call, data)
 
     elif call.data == 'LFI':
         data = gfi.get_info('ЛфИ')
-        send_descr(call, data)
+        return send_descr(call, data)
 
     elif call.data == 'FEFM':
         data = gfi.get_info('ФЭФМ')
-        send_descr(call, data)
+        return send_descr(call, data)
 
     elif call.data == 'FRKT':
         data = gfi.get_info('ФРКТ')
-        send_descr(call, data)
+        return send_descr(call, data)
 
     elif call.data == 'FBMF':
         data = gfi.get_info('ФБМФ')
-        send_descr(call, data)
+        return send_descr(call, data)
 
     elif call.data == 'INBICST':
         data = gfi.get_info('ИНБИКСТ')
-        send_descr(call, data)
+        return send_descr(call, data)
 
     elif call.data == 'FACT':
         data = gfi.get_info('ФАКТ')
-        send_descr(call, data)
+        return send_descr(call, data)
 
     return 0
 
