@@ -28,15 +28,20 @@ def cel(call):
 
 def send_descr(call, data):
     chat_id = call.message.chat.id
-    bot.send_message(char_id,
-            f"{data['name']}\n"
-             "--------------\n"
-            f"{data['description']}\n"
-             "--------------\n"
-            f"{data['address']}\n"
-            f"{data['phones']}\n"
-            f"{data['email']}\n"
-            f"{data['site']}")
+    out =   f"{data['name']}\n" \
+             "--------------\n" \
+            f"{data['description']}\n" \
+             "--------------\n" \
+            f"{data['address']}\n" \
+            f"{data['phones']}\n" \
+            f"{data['email']}\n" \
+            f"{data['site']}"
+
+    print(out)
+
+    bot.send_message(char_id, out)
+    bachelor(call)
+    return BACH
 
 def bachelor(call):
     bac = 1
@@ -256,6 +261,7 @@ def query_handler(call):
 
     elif call.data == 'FPMI':
         data = gfi.get_info('ФПМИ')
+        print(data)
         send_descr(call, data)
 
     elif call.data == 'LFI':
