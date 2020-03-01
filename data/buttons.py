@@ -11,3 +11,4 @@ bachelor_buttons = {
     'mainmenu': 'back'
 }
 
+ask_question = "Задать свой вопрос"
