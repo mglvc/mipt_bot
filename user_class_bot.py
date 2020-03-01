@@ -71,7 +71,7 @@ class UserBot:
                         f"biology = {self.biology}, "
                         f"informatics = {self.informatics}, "
                         f"physics = {self.physics}, "
-                        f"chemistry = {self.chemistry}, "
+                        f"chemistry = {self.chemistry} "
                         f"WHERE user_id = {self.user_id} ")
 
             conn.commit()
