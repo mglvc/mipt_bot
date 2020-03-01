@@ -32,7 +32,7 @@ def bachelor(call):
         types.InlineKeyboardButton(text="Куда можно поступить?",
                                    callback_data='exams'))
     keyboardmain.add(
-        types.InlineKeyboardButton(text="Олимпиады дающие льготы", callback_data='olimp'))
+        types.InlineKeyboardButton(text="🏅 Олимпиады дающие льготы", callback_data='olimp'))
     keyboardmain.add(
         types.InlineKeyboardButton(text="Целевое обучение за счет компаний", callback_data="celevoe"))
     keyboardmain.add(telebot.types.InlineKeyboardButton(text='❓ Часто задаваемые вопросы',
@@ -48,7 +48,7 @@ def facs_info(call):
     pass
 
 def exams_read(call):
-    chat_id = call.message.chat.id;
+    chat_id = call.message.chat.id
     bot.send_message(chat_id,
             "Введите экзамены точно в данном порядке:\n"
             "Математика Русский Биология Информатика Физика Химия\n"
@@ -107,9 +107,9 @@ def mainm(call):
     bac, mag = 0, 0
     markup = telebot.types.InlineKeyboardMarkup()
     markup.add(
-        telebot.types.InlineKeyboardButton(text='Бакалавриат или специалитет',
+        telebot.types.InlineKeyboardButton(text='🎓 Бакалавриат или специалитет',
                                            callback_data=3))
-    markup.add(telebot.types.InlineKeyboardButton(text='Магистратура',
+    markup.add(telebot.types.InlineKeyboardButton(text='🎓 Магистратура',
                                                   callback_data=4))
     # markup.add(telebot.types.InlineKeyboardButton(text='Почитать FAQ', callback_data=5))
     bot.send_message(chat_id=call.message.chat.id,
@@ -159,13 +159,13 @@ def start_message(message, error=0):
         bot.send_message(message.chat.id, "Wrong data")
     markup = telebot.types.InlineKeyboardMarkup()
     markup.add(
-        telebot.types.InlineKeyboardButton(text='Бакалавриат или специалитет',
+        telebot.types.InlineKeyboardButton(text='🎓 Бакалавриат или специалитет',
                                            callback_data=3))
-    markup.add(telebot.types.InlineKeyboardButton(text='Магистратура',
+    markup.add(telebot.types.InlineKeyboardButton(text='🎓 Магистратура',
                                                   callback_data=4))
     # markup.add(telebot.types.InlineKeyboardButton(text='Почитать FAQ', callback_data=5))
     bot.send_message(message.chat.id, text=
-    "🤖 Вас приветствет чат бот приемной комииссии МФТИ.🤖\n"
+    "🤖 Вас приветствет чат бот приемной комииссии МФТИ.\n"
     "Выберите интересующую вас академическую степень.\n"
     "Так же вы можете задать интересующий вас вопрос боту.",
                      reply_markup=markup)
