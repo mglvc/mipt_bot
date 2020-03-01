@@ -43,6 +43,9 @@ def bachelor(call):
                           text="вы собираетесь в бакалавриат или специалитет",
                           reply_markup=keyboardmain)
 
+def facs_info(call):
+    pass
+
 def exams_read(call):
     chat_id = call.message.chat.id;
     bot.send_message(chat_id,
@@ -200,10 +203,14 @@ def query_handler(call):
 
     elif call.data == 'mainmenu':
         mainm(call)
-    return 0
 
     elif call.data == 'exams':
         return exams_read(call)
+
+    elif call.data == 'facs':
+        facs_info(call)
+
+    return 0
 
 # @bot.message_handler(content_types=['text'])
 # def send_ms(message):
