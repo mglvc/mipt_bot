@@ -30,6 +30,9 @@ def calc_ege(subjects, csv_path='data/sc.csv', budget_flag=0):
             else: # contract
                 passing = int(row[-2])
 
+            row[-2] = 'Проходные:\n- Контракт: ' + row[-2] + ";\n"
+            row[-3] = '- Бюджет: '               + row[-3] + ";\n"
+
             if score_cur + 10 >= passing:
                 var_ret.append(row + [str(score_cur)])
 
