@@ -96,6 +96,7 @@ class UserBot:
             self.telebot.send_message(message.chat.id, out)
             self.state = 0
             self.update_data()
+            return bot.start_message(message)
 
         else:
             result = compare.compare(message.text)
