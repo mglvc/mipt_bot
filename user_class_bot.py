@@ -7,6 +7,7 @@ from data.consts import delimiter
 from data.consts import subjects_in_db_start, subjects_in_db_end
 from send_message import *
 
+
 # BD connect
 conn = db_connect.conn_to_db()
 

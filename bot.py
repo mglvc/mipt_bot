@@ -8,6 +8,8 @@ from config.bot_config import TOKEN
 from data.consts import BACH, MAST
 from data.consts import QUEST_STATE, EXAMS_STATE
 
+import get_fac_info as gfi
+
 # TOKEN = '955620028:AAFuqC8MSVkQa-50OdCnCxNyI5BJXHCAf8c'
 
 string = ''
@@ -23,6 +25,17 @@ def cel(call):
                           text="Прием на целевое направление https://t.me/iv?url=https%3A%2F%2Fpk.mipt.ru%2Fbachelor%2Fcorp%2F&rhash=d8d1e26f87c4db",
                           reply_markup=keyboardmain)
 
+def send_descr(call, data):
+    chat_id = call.message.chat.id
+    bot.send_message(char_id,
+            f"{data['name']}\n"
+             "--------------\n"
+            f"{data['description']}\n"
+             "--------------\n"
+            f"{data['address']}\n"
+            f"{data['phones']}\n"
+            f"{data['email']}\n"
+            f"{data['site']}")
 
 def bachelor(call):
     bac = 1
@@ -44,7 +57,29 @@ def bachelor(call):
                           reply_markup=keyboardmain)
 
 def facs_info(call):
-    pass
+    chat_id = call.message.chat.id;
+    keyboardmain = types.InlineKeyboardMarkup(row_width=6)
+    keyboardmain.add(
+        types.InlineKeyboardButton(text="ФРКТ",
+                                   callback_data='FRKT'))
+    keyboardmain.add(
+        types.InlineKeyboardButton(text="ФПМИ", callback_data='FPMI'))
+    keyboardmain.add(
+        types.InlineKeyboardButton(text="ЛФИ", callback_data="LFI"))
+    keyboardmain.add(
+        types.InlineKeyboardButton(text='ФЭФМ', callback_data="FEFM"))
+    keyboardmain.add(
+        types.InlineKeyboardButton(text="ФБМФ", callback_data="FBMF"))
+    keyboardmain.add(
+        types.InlineKeyboardButton(text="ИНБИКСТ", callback_data="INBICST"))
+    keyboardmain.add(
+        types.InlineKeyboardButton(text="ФАКТ", callback_data="FAKT"))
+
+    bot.edit_message_text(chat_id=call.message.chat.id,
+                          message_id=call.message.message_id,
+                          text="Выберите факультет",
+                          reply_markup=keyboardmain)
+
 
 def exams_read(call):
     chat_id = call.message.chat.id;
@@ -207,6 +242,34 @@ def query_handler(call):
 
     elif call.data == 'facs':
         facs_info(call)
+
+    elif call.data == 'FPMI':
+        data = gfi.get_info('ФПМИ')
+        send_descr(call, data)
+
+    elif call.data == 'LFI':
+        data = gfi.get_info('ЛфИ')
+        send_descr(call, data)
+
+    elif call.data == 'FEFM':
+        data = gfi.get_info('ФЭФМ')
+        send_descr(call, data)
+
+    elif call.data == 'FRKT':
+        data = gfi.get_info('ФРКТ')
+        send_descr(call, data)
+
+    elif call.data == 'FBMF':
+        data = gfi.get_info('ФБМФ')
+        send_descr(call, data)
+
+    elif call.data == 'INBICST':
+        data = gfi.get_info('ИНБИКСТ')
+        send_descr(call, data)
+
+    elif call.data == 'FACT':
+        data = gfi.get_info('ФАКТ')
+        send_descr(call, data)
 
     return 0
 
