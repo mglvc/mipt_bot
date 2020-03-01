@@ -15,7 +15,7 @@ def compare(question):
     Score, Score2, Score3, Score4, Score5 = 0, 0, 0, 0, 0
     with open(file_name, newline='') as csvfile:
         df = csv.reader(csvfile, delimiter=';')
-        print(df[3])
+        # print(df[3])
         for row in df:
             # print(i)
             # print(df[x-1:x])

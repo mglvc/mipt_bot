@@ -102,17 +102,6 @@ def mainm(call):
     bot.send_message(chat_id=call.message.chat.id,
                      text="Вы хотите поступить в...", reply_markup=markup)
 
-
-# def quest_b(c):
-#     k = types.InlineKeyboardMarkup(row_width = 1)
-#     k.add(types.InlineKeyboardButton(text='back', callback_data='bacmenu'))
-#     bot.edit_message_text(chat_id = c, message_id=call.message.message_id, text="Напишите ваш вопрос", reply_markup=k)
-#
-# def quest_m(c):
-#     k = types.InlineKeyboardMarkup(row_width = 1)
-#     k.add(types.InlineKeyboardButton(text='back', callback_data='4'))
-#     bot.edit_message_text(chat_id = c, message_id=call.message.message_id, text="Напишите ваш вопрос", reply_markup=k)
-
 def quest(call):
     k = types.InlineKeyboardMarkup(row_width=1)
     k.add(types.InlineKeyboardButton(text='back', callback_data='4'))
@@ -172,14 +161,6 @@ def query_handler(call):
 
     elif call.data == "celevoe":
         cel(call)
-    # elif call.data == "exams":
-    #	phis, prmath, russ, inf = 0, 0, 0, 0
-    #	key = telebot.types.InlineKeyboardMarkup(row_width=4)
-    #	key.add(types.InlineKeyboardButton(text="Физику, проф. математику и русский", callback_data="fmr"))
-    #	key.add(types.InlineKeyboardButton(text="Физику, информатику, проф. математику и русский", callback_data="fimr"))
-    #	key.add(types.InlineKeyboardButton(text="Информатику, проф. математику, русский", callback_data="mir"))
-    #	key.add(telebot.types.InlineKeyboardButton(text='back', callback_data="bacmenu"))
-    #	bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id, text="Вы сдавали...",reply_markup=key)
 
     elif call.data == "olimp":
         olymp(call)
@@ -187,23 +168,6 @@ def query_handler(call):
     elif call.data == "bacmenu":
         bachelor(call)
         return BACH
-    # elif call.data == 'fmr':
-    #	phis, prmath, russ = 1, 1, 1	
-    #	k = types.InlineKeyboardMarkup(row_width=1)
-    #	k.add(telebot.types.InlineKeyboardButton(text='back', callback_data="exams"))
-    #	bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id, text="Физику, профильную математику, русский",reply_markup=k)
-
-    # elif call.data == 'fimr':
-    #	phis, inf, prmath, russ = 1, 1, 1, 1
-    #	k = types.InlineKeyboardMarkup(row_width=1)
-    #	k.add(telebot.types.InlineKeyboardButton(text='back', callback_data="exams"))
-    #	bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id, text="Физику, профильную математику, русскийи и информатику",reply_markup=k)
-
-    # elif call.data == 'mir':
-    #	inf, prmath, russ = 1, 1, 1
-    #	k = types.InlineKeyboardMarkup(row_width=1)
-    #	k.add(telebot.types.InlineKeyboardButton(text='back', callback_data="exams"))
-    #	bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id, text="Информатику, профильную математику, русский",reply_markup=k)
 
     elif call.data == '4':
         maga(call)

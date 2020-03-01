@@ -41,8 +41,8 @@ class UserBot:
             data = cur.fetchone()
             if data:
                 print(f"User {user.id}, {user.first_name} already in DB")
-                self.degree_status = data[1]
-                self.gov_status = data[2]
+                self.degree_status = data[2]
+                self.gov_status = data[3]
                 self.state = data[5]
                 self.init_subjects(data[subjects_in_db_start:
                                         subjects_in_db_end])
