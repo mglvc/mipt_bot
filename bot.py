@@ -7,6 +7,7 @@ from telebot import types
 from config.bot_config import TOKEN
 from data.consts import BACH, MAST
 from data.consts import QUEST_STATE, EXAMS_STATE
+from data.buttons import *
 
 # TOKEN = '955620028:AAFuqC8MSVkQa-50OdCnCxNyI5BJXHCAf8c'
 
@@ -34,7 +35,7 @@ def bachelor(call):
         types.InlineKeyboardButton(text="Олимпиады дающие льготы", callback_data='olimp'))
     keyboardmain.add(
         types.InlineKeyboardButton(text="Целевое обучение за счет компаний", callback_data="celevoe"))
-    keyboardmain.add(telebot.types.InlineKeyboardButton(text='Часто задаваемые вопросы',
+    keyboardmain.add(telebot.types.InlineKeyboardButton(text='❓ Часто задаваемые вопросы',
                                                         callback_data=5))
     keyboardmain.add(
         types.InlineKeyboardButton(text="back", callback_data="mainmenu"))
@@ -69,7 +70,7 @@ def olymp(call):
 
 def maga(call):
     key = types.InlineKeyboardMarkup(row_width=2)
-    key.add(types.InlineKeyboardButton(text="Часто задаваемые вопросы", callback_data="6"))
+    key.add(types.InlineKeyboardButton(text="❓ Часто задаваемые вопросы", callback_data="6"))
     key.add(types.InlineKeyboardButton(text="Назад", callback_data="mainmenu"))
     bot.edit_message_text(chat_id=call.message.chat.id,
                           message_id=call.message.message_id,
@@ -80,7 +81,7 @@ def maga(call):
 def faqmag(call):
     key = types.InlineKeyboardMarkup(row_width=2)
     key.add(types.InlineKeyboardButton(
-        text="Не нашел ответа в FAQ, хочу задать задать свой вопрос",
+        text=ask_question,
         callback_data="quest_mag"))
     key.add(types.InlineKeyboardButton(text="Назад", callback_data="maga"))
     bot.edit_message_text(chat_id=call.message.chat.id,
@@ -92,7 +93,7 @@ def faqmag(call):
 def faqbac(call):
     key = types.InlineKeyboardMarkup(row_width=2)
     key.add(types.InlineKeyboardButton(
-        text="Не нашел ответа в FAQ, хочу задать задать свой вопрос",
+        text=ask_question,
         callback_data="quest_bac"))
     key.add(types.InlineKeyboardButton(text="Назад", callback_data="bacmenu"))
     bot.edit_message_text(chat_id=call.message.chat.id,
@@ -112,13 +113,14 @@ def mainm(call):
                                                   callback_data=4))
     # markup.add(telebot.types.InlineKeyboardButton(text='Почитать FAQ', callback_data=5))
     bot.send_message(chat_id=call.message.chat.id,
-                     text="Вы хотите поступить в...", reply_markup=markup)
+                     text="Выберете интересующую вас академическую степень или"
+                          " задайте вопрос:", reply_markup=markup)
 
 def quest(call):
     k = types.InlineKeyboardMarkup(row_width=1)
     k.add(types.InlineKeyboardButton(text='Назад', callback_data='4'))
     bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                          text="Напишите ваш вопрос", reply_markup=k)
+                          text="Напишите ваш вопрос:", reply_markup=k)
 
 
 def get_info(fac, csv_path):
@@ -157,15 +159,15 @@ def start_message(message, error=0):
         bot.send_message(message.chat.id, "Wrong data")
     markup = telebot.types.InlineKeyboardMarkup()
     markup.add(
-        telebot.types.InlineKeyboardButton(text='Бакалавриат или магистратура',
+        telebot.types.InlineKeyboardButton(text='Бакалавриат или специалитет',
                                            callback_data=3))
     markup.add(telebot.types.InlineKeyboardButton(text='Магистратура',
                                                   callback_data=4))
     # markup.add(telebot.types.InlineKeyboardButton(text='Почитать FAQ', callback_data=5))
     bot.send_message(message.chat.id, text=
-    "Вас приветствет чат бот приемной комииссии МФТИ\n"
+    "🤖 Вас приветствет чат бот приемной комииссии МФТИ.🤖\n"
     "Выберите интересующую вас академическую степень.\n"
-    "Так же вы можете задать интересующий вас вопрост этому боту.",
+    "Так же вы можете задать интересующий вас вопрос боту.",
                      reply_markup=markup)
 
 
