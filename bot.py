@@ -39,7 +39,7 @@ def send_descr(call, data):
 
     print(out)
 
-    bot.send_message(char_id, out)
+    bot.send_message(chat_id, out)
     bachelor(call)
     return BACH
 
@@ -261,7 +261,6 @@ def query_handler(call):
 
     elif call.data == 'FPMI':
         data = gfi.get_info('ФПМИ')
-        print(data)
         send_descr(call, data)
 
     elif call.data == 'LFI':
