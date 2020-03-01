@@ -152,8 +152,10 @@ def get_info(fac, csv_path):
 
 bac, mag, phis, prmath, russ, inf = 0, 0, 0, 0, 0, 0
 
-@bot.message_handler(commands=['start'])
+@bot.message_handler(commands=['start'], error=0)
 def start_message(message):
+    if error:
+        bot.send_message(message.chat.id, "Wrong data")
     markup = telebot.types.InlineKeyboardMarkup()
     markup.add(
         telebot.types.InlineKeyboardButton(text='Бакалавриат или специалитет',

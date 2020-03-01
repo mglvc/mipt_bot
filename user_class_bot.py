@@ -90,6 +90,10 @@ class UserBot:
                 self.telebot.send_message(message.chat.id, mes)
         elif self.state == bot.EXAMS_STATE:
             result = message.text.split()
+            if len(results) < 6:
+                self.state = 0
+                self.update()
+                return bot.start_message(message, -1)
             self.init_subjects(self, [int(sub) for sub in result])
             exams = {
                 "math": self.math,
@@ -102,6 +106,8 @@ class UserBot:
             opps = calc_ege(exams)
             out = '\n\n===========\n\n'.join([' '.join(row) for row in opps])
             self.telebot.send_message(message.chat.id, out)
+            self.state = 0
+            self.update_data()
 
         else:
             send_help_message(self.telebot, message.chat.id)
