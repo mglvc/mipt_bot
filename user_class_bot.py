@@ -1,12 +1,11 @@
+import bot
 import bot as message_handlers
 import compare_old as compare
 import db_connect
+from calc_ege import calc_ege
 from data.consts import delimiter
 from data.consts import subjects_in_db_start, subjects_in_db_end
 from send_message import *
-import bot
-
-from calc_ege import calc_ege
 
 # BD connect
 conn = db_connect.conn_to_db()
@@ -77,27 +76,16 @@ class UserBot:
             conn.commit()
 
     def handle_message(self, message):
-        if self.state == bot.QUEST_STATE:
-            result = compare.compare(message.text)
-            if isinstance(result, str):
-                self.telebot.send_message(message.chat.id, result)
-            else:
-                mes = ""
-                for i, ans in enumerate(result):
-                    mes += ans[0] + '\n' + ans[1]
-                    if i != len(result) - 1:
-                        mes += delimiter
-                self.telebot.send_message(message.chat.id, mes)
-        elif self.state == bot.EXAMS_STATE:
+        if self.state == bot.EXAMS_STATE:
             result = message.text.split()
-            if len(results) < 6:
+            if len(result) < 6:
                 self.state = 0
-                self.update()
+                self.update_data()
                 return bot.start_message(message, -1)
-            self.init_subjects(self, [int(sub) for sub in result])
+            self.init_subjects([int(sub) for sub in result])
             exams = {
                 "math": self.math,
-                "russian": self.russian,
+                "russ": self.russian,
                 "bio": self.biology,
                 "info": self.informatics,
                 "phys": self.physics,
@@ -110,7 +98,16 @@ class UserBot:
             self.update_data()
 
         else:
-            send_help_message(self.telebot, message.chat.id)
+            result = compare.compare(message.text)
+            if isinstance(result, str):
+                self.telebot.send_message(message.chat.id, result)
+            else:
+                mes = ""
+                for i, ans in enumerate(result):
+                    mes += ans[0] + '\n' + ans[1]
+                    if i != len(result) - 1:
+                        mes += delimiter
+                self.telebot.send_message(message.chat.id, mes)
 
     def handle_commands(self, message):
         print("Message from class", message.text[1:])
