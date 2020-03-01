@@ -6,6 +6,8 @@ from data.consts import subjects_in_db_start, subjects_in_db_end
 from send_message import *
 import bot
 
+from calc_ege import calc_ege
+
 # BD connect
 conn = db_connect.conn_to_db()
 
@@ -63,8 +65,15 @@ class UserBot:
                         f"SET "
                         f"degree_status = {self.degree_status}, "
                         f"gov_status = {self.gov_status}, "
-                        f"state = {self.state} "
+                        f"state = {self.state}, "
+                        f"math = {self.math}, "
+                        f"russian = {self.russian}, "
+                        f"biology = {self.biology}, "
+                        f"informatics = {self.informatics}, "
+                        f"physics = {self.physics}, "
+                        f"chemistry = {self.chemistry}, "
                         f"WHERE user_id = {self.user_id} ")
+
             conn.commit()
 
     def handle_message(self, message):
@@ -79,6 +88,21 @@ class UserBot:
                     if i != len(result) - 1:
                         mes += delimiter
                 self.telebot.send_message(message.chat.id, mes)
+        elif self.state == bot.EXAMS_STATE:
+            result = message.text.split()
+            self.init_subjects(self, [int(sub) for sub in result])
+            exams = {
+                "math": self.math,
+                "russian": self.russian,
+                "bio": self.biology,
+                "info": self.informatics,
+                "phys": self.physics,
+                "chem": self.chemistry
+            }
+            opps = calc_ege(exams)
+            out = '\n\n===========\n\n'.join([' '.join(row) for row in opps])
+            self.telebot.send_message(message.chat.id, out)
+
         else:
             send_help_message(self.telebot, message.chat.id)
 

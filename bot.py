@@ -43,6 +43,19 @@ def bachelor(call):
                           text="вы собираетесь в бакалавриат или специалитет",
                           reply_markup=keyboardmain)
 
+def facs_info(call):
+    pass
+
+def exams_read(call):
+    chat_id = call.message.chat.id;
+    bot.send_message(chat_id,
+            "Введите экзамены точно в данном порядке:\n"
+            "Математика Русский Биология Информатика Физика Химия\n"
+            "-------------\n"
+            "Те предметы, что не надо учитывать, заполняйте нулём.\n"
+            "Пример: 92 88 0 100 76 0")
+    return EXAMS_STATE
+
 
 def olymp(call):
     k = types.InlineKeyboardMarkup(row_width=1)
@@ -191,6 +204,13 @@ def query_handler(call):
 
     elif call.data == 'mainmenu':
         mainm(call)
+
+    elif call.data == 'exams':
+        return exams_read(call)
+
+    elif call.data == 'facs':
+        facs_info(call)
+
     return 0
 
 # @bot.message_handler(content_types=['text'])
