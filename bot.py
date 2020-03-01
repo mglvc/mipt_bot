@@ -45,6 +45,9 @@ def bachelor(call):
         types.InlineKeyboardButton(text="Куда можно поступить?",
                                    callback_data='exams'))
     keyboardmain.add(
+        types.InlineKeyboardButton(text="Описания факультетов",
+                                   callback_data='facs'))
+    keyboardmain.add(
         types.InlineKeyboardButton(text="🏅 Олимпиады дающие льготы", callback_data='olimp'))
     keyboardmain.add(
         types.InlineKeyboardButton(text="Целевое обучение за счет компаний", callback_data="celevoe"))
