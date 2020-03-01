@@ -60,7 +60,7 @@ def maga(call):
     key = types.InlineKeyboardMarkup(row_width=2)
     key.add(types.InlineKeyboardButton(text="Почитать FAQ", callback_data="6"))
     key.add(types.InlineKeyboardButton(text="back", callback_data="mainmenu"))
-    bot.edit_message_text(chat_id=call.chat.id,
+    bot.edit_message_text(chat_id=call.message.chat.id,
                           message_id=call.message.message_id,
                           text="Вы собираетесь поступать в магистратуру",
                           reply_markup=key)
@@ -72,8 +72,8 @@ def faqmag(call):
     key = types.InlineKeyboardMarkup(row_width=2)
     key.add(types.InlineKeyboardButton(text="Почитать FAQ", callback_data="6"))
     key.add(types.InlineKeyboardButton(text="back", callback_data="mainmenu"))
-    bot.edit_message_text(chat_id=call, message_id=call.message.message_id,
-                          text="Вы собираетесь поступать в магистратуру",
+    bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                          text="Для поступающих в магистратуру может быть полезна следующая информация",
                           reply_markup=key)
 
 
