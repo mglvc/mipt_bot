@@ -6,7 +6,7 @@ from telebot import types
 
 from config.bot_config import TOKEN
 from data.consts import BACH, MAST
-from data.consts import QUEST_STATE
+from data.consts import QUEST_STATE, EXAMS_STATE
 
 # TOKEN = '955620028:AAFuqC8MSVkQa-50OdCnCxNyI5BJXHCAf8c'
 
@@ -68,20 +68,16 @@ def olymp(call):
 
 
 def maga(call):
-    # answer = 'Магистратуру'
-    mag = 1
     key = types.InlineKeyboardMarkup(row_width=2)
     key.add(types.InlineKeyboardButton(text="Часто задаваемые вопросы", callback_data="6"))
     key.add(types.InlineKeyboardButton(text="Назад", callback_data="mainmenu"))
     bot.edit_message_text(chat_id=call.message.chat.id,
                           message_id=call.message.message_id,
-                          text="Вы собираетесь поступать в магистратуру",
+                          text="Для поступающих в магистратуру может быть полезна следующая информация",
                           reply_markup=key)
 
 
 def faqmag(call):
-    answer = 'магистратуру'
-    mag = 1
     key = types.InlineKeyboardMarkup(row_width=2)
     key.add(types.InlineKeyboardButton(text="Часто задаваемые вопросы", callback_data="6"))
     key.add(types.InlineKeyboardButton(text="Назад", callback_data="mainmenu"))
