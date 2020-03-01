@@ -62,18 +62,19 @@ def maga(call):
     key.add(types.InlineKeyboardButton(text="back", callback_data="mainmenu"))
     bot.edit_message_text(chat_id=call.message.chat.id,
                           message_id=call.message.message_id,
-                          text="Вы собираетесь поступать в магистратуру",
+                          text="Для поступающих в магистратуру может быть полезна следующая информация",
                           reply_markup=key)
 
 
 def faqmag(call):
-    answer = 'магистратуру'
-    mag = 1
     key = types.InlineKeyboardMarkup(row_width=2)
-    key.add(types.InlineKeyboardButton(text="Почитать FAQ", callback_data="6"))
-    key.add(types.InlineKeyboardButton(text="back", callback_data="mainmenu"))
-    bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                          text="Для поступающих в магистратуру может быть полезна следующая информация",
+    key.add(types.InlineKeyboardButton(
+        text="Моего вопроса нет в FAQ, задать вопрос",
+        callback_data="quest_mag"))
+    key.add(types.InlineKeyboardButton(text="back", callback_data="bacmenu"))
+    bot.edit_message_text(chat_id=call.message.chat.id,
+                          message_id=call.message.message_id,
+                          text="Вы можете прочитать FAQ перейдя по этой ссылке https://t.me/iv?url=https%3A%2F%2Fpk.mipt.ru%2Fmaster%2Fquestion-answer%2F&rhash=a6c88d20ddb864",
                           reply_markup=key)
 
 
