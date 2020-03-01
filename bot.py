@@ -32,10 +32,10 @@ def send_descr(call, data):
              "--------------\n" \
             f"{data['description']}\n" \
              "--------------\n" \
-            f"{data['address']}\n" \
-            f"{data['phones']}\n" \
-            f"{data['email']}\n" \
-            f"{data['site']}"
+            f"{', '.join(data['address'])}\n" \
+            f"{', '.join(data['phones'])}\n" \
+            f"Email: {data['email']}\n" \
+            f"Сайт:  {data['site']}"
 
     print(out)
 
@@ -264,7 +264,7 @@ def query_handler(call):
         return send_descr(call, data)
 
     elif call.data == 'LFI':
-        data = gfi.get_info('ЛфИ')
+        data = gfi.get_info('ЛФИ')
         return send_descr(call, data)
 
     elif call.data == 'FEFM':
