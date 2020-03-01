@@ -1,6 +1,6 @@
+import bot as message_handlers
 import db_connect
 from send_message import *
-import bot as message_handlers
 
 # BD connect
 conn = db_connect.conn_to_db()
@@ -14,14 +14,14 @@ class UserBot:
         self.user_name = user.first_name
         self.telebot = bot
         # Check user in db
-        if self.find_user_db(user) == 0:
+        if self.find_user_db(user, update) == 0:
             # place for 1st question
             pass
             # place for 2nd question
             pass
         self.state = self.av_states[1]
 
-    def find_user_db(self, user):
+    def find_user_db(self, user, update):
         with conn.cursor() as cur:
             cur.execute(f"SELECT * from users WHERE {user.id} = user_id")
             # print(user.id)
@@ -32,8 +32,9 @@ class UserBot:
                 self.gov_status = data[2]
                 return 1
             else:
-                cur.execute(f"INSERT into users (user_id, name) "
-                            f"values ({user.id}, '{user.username}')")
+                cur.execute(
+                    f"INSERT into users (user_id, name, last_update_id) "
+                    f"values ({user.id}, '{user.username}', {update.update_id})")
                 print(f"Added user {user.id}, {user.first_name} in DB")
                 return 0
 
