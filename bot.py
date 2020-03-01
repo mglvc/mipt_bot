@@ -79,10 +79,13 @@ def maga(call):
 
 def faqmag(call):
     key = types.InlineKeyboardMarkup(row_width=2)
-    key.add(types.InlineKeyboardButton(text="Часто задаваемые вопросы", callback_data="6"))
-    key.add(types.InlineKeyboardButton(text="Назад", callback_data="mainmenu"))
-    bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                          text="Для поступающих в магистратуру может быть полезна следующая информация",
+    key.add(types.InlineKeyboardButton(
+        text="Не нашел ответа в FAQ, хочу задать задать свой вопрос",
+        callback_data="quest_mag"))
+    key.add(types.InlineKeyboardButton(text="Назад", callback_data="maga"))
+    bot.edit_message_text(chat_id=call.message.chat.id,
+                          message_id=call.message.message_id,
+                          text="Вы можете прочитать FAQ перейдя по этой ссылке https://t.me/iv?url=https%3A%2F%2Fpk.mipt.ru%2Fmaster%2Fquestion-answer%2F&rhash=a6c88d20ddb864",
                           reply_markup=key)
 
 
@@ -159,7 +162,10 @@ def start_message(message, error=0):
     markup.add(telebot.types.InlineKeyboardButton(text='Магистратура',
                                                   callback_data=4))
     # markup.add(telebot.types.InlineKeyboardButton(text='Почитать FAQ', callback_data=5))
-    bot.send_message(message.chat.id, text="Какие варианты поступления интересуют?",
+    bot.send_message(message.chat.id, text=
+    "Вас приветствет чат бот приемной комииссии МФТИ\n"
+    "Выберите интересующую вас академическую степень.\n"
+    "Так же вы можете задать интересующий вас вопрост этому боту.",
                      reply_markup=markup)
 
 
