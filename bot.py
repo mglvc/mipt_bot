@@ -9,12 +9,12 @@ TOKEN = '955620028:AAFuqC8MSVkQa-50OdCnCxNyI5BJXHCAf8c'
 
 string = ''
 
-def cel():
+def cel(c):
     keyboardmain = types.InlineKeyboardMarkup(row_width=1) 
     keyboardmain.add(types.InlineKeyboardButton(text="back", callback_data="bacmenu"))
-    bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id, text="прием на целевое направление https://t.me/iv?url=https%3A%2F%2Fpk.mipt.ru%2Fbachelor%2Fcorp%2F&rhash=d8d1e26f87c4db",reply_markup=keyboardmain)        
+    bot.edit_message_text(chat_id=c,message_id=call.message.message_id, text="прием на целевое направление https://t.me/iv?url=https%3A%2F%2Fpk.mipt.ru%2Fbachelor%2Fcorp%2F&rhash=d8d1e26f87c4db",reply_markup=keyboardmain)        
 
-def bachelor():
+def bachelor(c):
     bac = 1
     keyboardmain = types.InlineKeyboardMarkup(row_width=6)   
     keyboardmain.add(types.InlineKeyboardButton(text="Куда вы можете поступить?", callback_data='exams'))
@@ -22,52 +22,52 @@ def bachelor():
     keyboardmain.add(types.InlineKeyboardButton(text="Целевое", callback_data="celevoe")) 
     keyboardmain.add(telebot.types.InlineKeyboardButton(text='Почитать FAQ', callback_data= 5))
     keyboardmain.add(types.InlineKeyboardButton(text="back", callback_data="mainmenu"))
-    bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id, text="вы собираетесь в бакалавриат или специалитет",reply_markup=keyboardmain)
+    bot.edit_message_text(chat_id=c,message_id=call.message.message_id, text="вы собираетесь в бакалавриат или специалитет",reply_markup=keyboardmain)
 
-def olymp():
+def olymp(c):
     k = types.InlineKeyboardMarkup(row_width=1)
     k.add(telebot.types.InlineKeyboardButton(text='back', callback_data="bacmenu"))
-    bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id, text="Вы  можете поступить с помощью олимпиад из этого списка https://t.me/iv?url=https%3A%2F%2Fpk.mipt.ru%2Fbachelor%2F2020_olympiads%2F&rhash=d8d1e26f87c4db",reply_markup=k)
+    bot.edit_message_text(chat_id=c,message_id=call.message.message_id, text="Вы  можете поступить с помощью олимпиад из этого списка https://t.me/iv?url=https%3A%2F%2Fpk.mipt.ru%2Fbachelor%2F2020_olympiads%2F&rhash=d8d1e26f87c4db",reply_markup=k)
  
-def maga():
+def maga(c):
     #answer = 'магистратуру'
     mag = 1
     key = types.InlineKeyboardMarkup(row_width=2)
     key.add(types.InlineKeyboardButton(text="Почитать FAQ", callback_data="6"))
     key.add(types.InlineKeyboardButton(text="back", callback_data="mainmenu"))
-    bot.edit_message_text(chat_id = call.message.chat.id, message_id=call.message.message_id, text= "Вы собираетесь поступать в магистратуру", reply_markup=key)   
+    bot.edit_message_text(chat_id = c, message_id=call.message.message_id, text= "Вы собираетесь поступать в магистратуру", reply_markup=key)   
 
-def faqmag():
+def faqmag(c):
     answer = 'магистратуру'
         mag = 1
         key = types.InlineKeyboardMarkup(row_width=2)
         key.add(types.InlineKeyboardButton(text="Почитать FAQ", callback_data="6"))
         key.add(types.InlineKeyboardButton(text="back", callback_data="mainmenu"))
-        bot.edit_message_text(chat_id = call.message.chat.id, message_id=call.message.message_id, text= "Вы собираетесь поступать в магистратуру", reply_markup=key)
+        bot.edit_message_text(chat_id = c, message_id=call.message.message_id, text= "Вы собираетесь поступать в магистратуру", reply_markup=key)
 
-def faqmag():
+def faqmag(c):
     key = types.InlineKeyboardMarkup(row_width = 2)
     key.add(types.InlineKeyboardButton(text="Моего вопроса нет в FAQ, задать вопрос", callback_data="quest_bac"))
     key.add(types.InlineKeyboardButton(text="back", callback_data="bacmenu"))
-    bot.edit_message_text(chat_id = call.message.chat.id, message_id=call.message.message_id, text="Вы можете прочитать FAQ перейдя по этой ссылке https://t.me/iv?url=https%3A%2F%2Fpk.mipt.ru%2Fbachelor%2Fquestion-answer%2F&rhash=a6c88d20ddb864", reply_markup=key)
+    bot.edit_message_text(chat_id = c, message_id=call.message.message_id, text="Вы можете прочитать FAQ перейдя по этой ссылке https://t.me/iv?url=https%3A%2F%2Fpk.mipt.ru%2Fbachelor%2Fquestion-answer%2F&rhash=a6c88d20ddb864", reply_markup=key)
    
-def mainm():
+def mainm(c):
     bac, mag = 0, 0
     markup = telebot.types.InlineKeyboardMarkup()
     markup.add(telebot.types.InlineKeyboardButton(text='Бакалавриат или специалитет', callback_data=3))
     markup.add(telebot.types.InlineKeyboardButton(text='Магистратуру', callback_data=4))
     #markup.add(telebot.types.InlineKeyboardButton(text='Почитать FAQ', callback_data=5))
-    bot.send_message(call.message.chat.id, text="Вы хотите поступить в...",  reply_markup=markup)
+    bot.send_message(chat_id = c, text="Вы хотите поступить в...",  reply_markup=markup)
 
-def quest_b():
+def quest_b(c):
     k = types.InlineKeyboardMarkup(row_width = 1)
     k.add(types.InlineKeyboardButton(text='back', callback_data='bacmenu'))
-    bot.edit_message_text(chat_id = call.message.chat.id, message_id=call.message.message_id, text="Напишите ваш вопрос", reply_markup=k)
+    bot.edit_message_text(chat_id = c, message_id=call.message.message_id, text="Напишите ваш вопрос", reply_markup=k)
 
-def quest_m():
+def quest_m(c):
     k = types.InlineKeyboardMarkup(row_width = 1)
     k.add(types.InlineKeyboardButton(text='back', callback_data='4'))
-    bot.edit_message_text(chat_id = call.message.chat.id, message_id=call.message.message_id, text="Напишите ваш вопрос", reply_markup=k)   
+    bot.edit_message_text(chat_id = c, message_id=call.message.message_id, text="Напишите ваш вопрос", reply_markup=k)   
 
 
 def get_info(fac, csv_path):
@@ -128,10 +128,10 @@ def query_handler(call):
     global bac, mag, phis, prmath, russ, inf
     
     if call.data == '3':
-        bachelor()
+        bachelor(call.message.chat.id)
 
     elif call.data == "celevoe":
-    	cel()
+    	cel(call.message.chat.id)
     #elif call.data == "exams":
     #	phis, prmath, russ, inf = 0, 0, 0, 0
     #	key = telebot.types.InlineKeyboardMarkup(row_width=4)
@@ -142,10 +142,10 @@ def query_handler(call):
     #	bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id, text="Вы сдавали...",reply_markup=key)
 
     elif call.data == "olimp":
-        olymp()
+        olymp(call.message.chat.id)
     	
     elif call.data == "bacmenu":
-    	bachelor()
+    	bachelor(call.message.chat.id)
 
     #elif call.data == 'fmr':
     #	phis, prmath, russ = 1, 1, 1	
@@ -166,22 +166,22 @@ def query_handler(call):
     #	bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id, text="Информатику, профильную математику, русский",reply_markup=k)
 
     elif call.data == '4':
-        maga()
+        maga(call.message.chat.id)
     
     elif call.data == '6':
-    	faqmag()
+    	faqmag(call.message.chat.id)
     	
     elif call.data == '5':
-    	faqbac()
+    	faqbac(call.message.chat.id)
 
     elif call.data == "quest_bac":
-    	quest_b()
+    	quest_b(call.message.chat.id)
 
     elif call.data == "quest_mag":
-    	quest_m()
+    	quest_m(call.message.chat.id)
 
     elif call.data == 'mainmenu':
-        mainm()
+        mainm(call.message.chat.id)
 
 
 
